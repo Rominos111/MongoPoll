@@ -1,0 +1,11 @@
+{
+	"name": "gr3_info14",
+	"version": "1.0.0",
+	"scripts": {
+		"start": "node app"
+	},
+	"dependencies": {
+		"express": ">0",
+		"mongodb": ">0"
+	}
+}

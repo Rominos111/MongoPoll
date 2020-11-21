@@ -1,0 +1,11 @@
+.bash*
+.config
+.cache
+.idea
+**/vendor
+.npm
+node_modules
+.dbshell
+.profile
+package-lock.json
+.mongorc.js
