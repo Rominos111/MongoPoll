@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <!-- Website -->
+        <meta charset="utf-8" />
+        <title>TP2 INFO508 Romain</title>
+        <meta name="description" content="TP INFO508" />
+        <meta name="author" content="Romain" />
+        <meta name="keywords" content="Romain, INFO508" />
+
+        <!-- Mobile -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, shrink-to-fit=no" />
+        <meta name="handheldFriendly" content="false" />
+
+        <!-- Icons -->
+        <link rel="shortcut icon" href="resources/icons/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" sizes="180x180" href="resources/icons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="resources/icons/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="resources/icons/favicon-16x16.png" />
+        <link rel="manifest" href="resources/icons/site.webmanifest" />
+
+        <!-- Facebook OpenGraph -->
+        <meta property="og:title" content="TP INFO508" />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content="TP INFO508 de Romain" />
+        <meta property="og:image" content="resources/icons/favicon.ico" />
+        <meta property="og:url" content="http://mongo.learninglab.eu/gr3_info14/" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta property="og:site_name" content="TP INFO508" />
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:creator" content="@Rominos111" />
+        <meta name="twitter:title" content="TP INFO508" />
+        <meta name="twitter:description" content="TP INFO508 de Romain" />
+
+        <!-- IE -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <!--[if lt IE 9]>
+        <script>
+            document.createElement("header");
+            document.createElement("footer");
+            document.createElement("section");
+            document.createElement("aside");
+            document.createElement("nav");
+            document.createElement("article");
+            document.createElement("hgroup");
+            document.createElement("time");
+        </script>
+        <![endif]-->
+
+        <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/vendor/leaflet.css" />
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+
+    <!--*************************************************************************-->
+
+    <body class="content">
+        <div class="container-md">
+            <header>
+                <h1>Traitement du sondage de locomotions</h1>
+            </header>
+
+            <!--*************************************************************************-->
+            <hr />
+
+            <main>
+                <section>
+                    <p>Distance entre Chambéry et Le Bourget du Lac : <span id="dist">...</span> km</p>
+                </section>
+
+                <!--*************************************************************************-->
+                <hr />
+
+                <section class="row">
+                    <article class="col graphContainer">
+                        <p>Nombre qui n'ont pas cochés test : <span id="noTest">...</span> sur <span id="totalTest">...</span></p>
+                        <canvas id="graphNoTest"></canvas>
+                    </article>
+
+                    <article class="col graphContainer">
+                        <p>Prénoms</p><br>
+                        <div class="divTable"><table id="prenoms"></table></div>
+                        <div class="divAfterTable"></div><br />
+                        <p>On remarque certains noms incohérents, malicieusement ou non</p>
+                    </article>
+                </section>
+
+                <!--*************************************************************************-->
+                <hr />
+
+                <section class="row">
+                    <article class="col graphContainer">
+                        <p>Prénoms avec initiales</p>
+                        <canvas id="graphInitiales"></canvas>
+                    </article>
+
+                    <article class="col graphContainer">
+                        <p>Nombre selon la filière</p>
+                        <canvas id="graphFiliere"></canvas>
+                        <p>Les résultats viennent pour la quasi totalité d'étudiants en informatique</p>
+                    </article>
+                </section>
+
+                <!--*************************************************************************-->
+                <hr />
+
+                <section class="row">
+                    <article class="col graphContainer">
+                        <p>Nombre selon le moyen de locomotion</p>
+                        <canvas id="graphLocomotion"></canvas>
+                    </article>
+
+                    <article class="col graphContainer">
+                        <p>Nombre selon le niveau d'affluence des bus</p>
+                        <canvas id="graphBus"></canvas>
+                    </article>
+                </section>
+
+                <!--*************************************************************************-->
+                <hr />
+
+                <section class="row">
+                    <article class="col graphContainer">
+                        <p>Proportion de covoiturage : <span id="poolingPercent">...</span> %</p>
+                        <canvas id="graphPooling"></canvas>
+                    </article>
+
+                    <article class="col graphContainer">
+                        <p>Temps de déplacement moyen</p>
+                        <canvas id="graphLocomotionTime"></canvas>
+                        <p>Beaucoup d'étudiants ont plus d'une demi-heure de temps de transport</p>
+                    </article>
+                </section>
+
+                <!--*************************************************************************-->
+                <hr />
+
+                <section class="row">
+                    <article class="col graphContainer">
+                        <p>Satisfaction des moyens de locomotion</p>
+                        <canvas id="graphLocomotionSatisfaction"></canvas>
+                    </article>
+
+                    <article class="col graphContainer">
+                        <p>Origines par département et distances des étudiants</p>
+                        <p>Distance moyenne : <span id="meanDist">...</span> km</p>
+                        <!-- On a eu l'idée en même temps avec Yohann -->
+                        <div id="postalMap"></div>
+                        <p>Une bonne quantité d'étudiants viennent du bassin chambérien ou de ses environs</p>
+                    </article>
+                </section>
+
+                <!--*************************************************************************-->
+                <hr />
+
+                <section class="row">
+                    <article class="col">
+                        <p>
+                            Ces données sont à prendre avec des pincettes : en effet, certaines données sont erronées,
+                            comme des noms qui n'existent pas, des adresses non conformes à la nomenclature, des valeurs aberrantes
+                            ou encore des champs laissés vides.<br />
+                            Cependant, il peut être intéressant d'analyser les données "honnêtes", qui nous donnent un bon aperçu
+                            des différents modes de vie parmi les multiples populations que comprend notre classe selon l'origine géographique.<br />
+                            À noter cependant que cet échantillon est certes représentatif de notre promo d'info, mais
+                            ne l'est probablement plus à l'échelle de l'université, qui a sûrement des populations différentes.
+                        </p>
+                    </article>
+                </section>
+            </main>
+
+            <footer>
+                &copy; Romain THEODET, CMI INFO L3
+            </footer>
+        </div>
+
+        <!--*************************************************************************-->
+
+        <div class="modal fade" id="themeModal" tabindex="-1" role="dialog" aria-labelledby="themeModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thème</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Quel thème préférez-vous ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="unsetDarkMode();">Clair</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="setDarkMode();">Sombre</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--*************************************************************************-->
+
+        <script src="js/vendor/jquery-3.5.1.min.js"></script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/Chart.min.js"></script>
+        <script src="js/vendor/leaflet.js"></script>
+        <script defer src="js/utils.js"></script>
+        <script defer src="js/main.js"></script>
+    </body>
+</html>
